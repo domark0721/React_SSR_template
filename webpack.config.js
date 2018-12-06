@@ -30,7 +30,7 @@ module.exports = {
   // bundle
   output: {
     path: path.resolve(__dirname, outputDir),
-    publicPath: '/',
+    publicPath: '/build',
     filename: 'bundle.js',
   },
   plugins: [
@@ -41,7 +41,7 @@ module.exports = {
   devServer: {
     port: 5000,
     open: true,
-    // contentBase: './dist',
+    contentBase: './dist',
     hot: true,
   },
 }
