@@ -1,14 +1,26 @@
 const path = require('path')
 const webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const outputDir = 'dist'
 
 module.exports = {
-  entry: './src/index.js',
+  // babel-polyfill is for IE
+  entry: ['@babel/polyfill', './src/index.js'],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
+      },
+      {
+        test: /\.(scss|sass)$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS, using Node Sass by default
+        ],
       },
     ],
   },
@@ -17,16 +29,19 @@ module.exports = {
   },
   // bundle
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, outputDir),
     publicPath: '/',
     filename: 'bundle.js',
   },
   plugins: [
+    // new CleanWebpackPlugin([outputDir]),
     new webpack.HotModuleReplacementPlugin(),
   ],
   // server
   devServer: {
-    contentBase: './dist',
+    port: 5000,
+    open: true,
+    // contentBase: './dist',
     hot: true,
   },
 }
