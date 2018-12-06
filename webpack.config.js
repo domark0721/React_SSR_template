@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -8,20 +9,24 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
-      }
+      },
     ],
-    resolve: {
-      extensions: ['*', '.js', '.jsx'],
-    }
   },
-  // bundle 
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
+  // bundle
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
-  // server 
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  // server
   devServer: {
     contentBase: './dist',
-  }
+    hot: true,
+  },
 }
