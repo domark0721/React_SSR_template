@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const Koa = require('koa')
 const logger = require('./middlewares/logger')
 const router = require('../Router')
@@ -11,7 +13,6 @@ app.use(router.allowedMethods())
 
 /* start server */
 app.listen(PORT, () => {
-  /* eslint-disable no-console */
   console.log(`Open Url http://localhost:${PORT} to get started`)
 })
 

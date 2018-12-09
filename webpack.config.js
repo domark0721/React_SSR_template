@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const outputDir = 'dist'
@@ -36,16 +36,16 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin([outputDir]),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    // new HtmlWebpackPlugin({
+    //   template: './public/index.html',
+    // }),
   ],
   // server
-  devServer: {
-    port: 5000,
-    open: true,
-    contentBase: './dist',
-    hot: true,
-  },
+  // devServer: {
+  //   port: 5000,
+  //   contentBase: './dist',
+  //   hot: true,
+  // },
 }
