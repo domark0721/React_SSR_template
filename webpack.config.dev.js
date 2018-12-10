@@ -8,7 +8,7 @@ const outputDir = 'dist'
 module.exports = {
   // babel-polyfill is for IE
   mode: 'development',
-  entry: ['react-hot-loader/patch', '@babel/polyfill', './src/index.js'],
+  entry: ['@babel/polyfill', './src/index.js'],
   module: {
     rules: [
       {
