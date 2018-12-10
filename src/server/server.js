@@ -5,7 +5,7 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import { renderToStaticMarkup } from 'react-dom/server'
-import webpackConfig from '../../webpack.config'
+import webpackConfig from '../../webpack.config.dev'
 
 
 import Html from '../Html'
