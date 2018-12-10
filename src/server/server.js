@@ -2,7 +2,8 @@
 import React from 'react'
 import express from 'express'
 import webpack from 'webpack'
-import devMiddleware from 'webpack-dev-middleware'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 import { renderToStaticMarkup } from 'react-dom/server'
 import webpackConfig from '../../webpack.config'
 
@@ -15,10 +16,15 @@ const PORT = process.env.PORT || 3000
 
 const app = express()
 
-app.use(devMiddleware(compiler, {
+// Add middleware for connecting webpack bundle.js
+app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
+  hot: true,
   publickPath: webpackConfig.output.publicPath,
 }))
+
+// Add hot middleware support
+app.use(webpackHotMiddleware(compiler))
 
 app.get('*', (req, res) => {
   const appRendered = renderToStaticMarkup(

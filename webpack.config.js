@@ -7,13 +7,16 @@ const outputDir = 'dist'
 
 module.exports = {
   // babel-polyfill is for IE
-  entry: ['@babel/polyfill', './src/index.js'],
+  mode: 'development',
+  entry: ['react-hot-loader/patch', '@babel/polyfill', './src/index.js'],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: [
+          'babel-loader',
+        ],
       },
       {
         test: /\.(scss|sass)$/,
@@ -37,7 +40,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDir]),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     // new HtmlWebpackPlugin({
     //   template: './public/index.html',
     // }),
