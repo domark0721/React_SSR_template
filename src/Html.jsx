@@ -9,9 +9,7 @@ const Html = ({ children }) => (
 
     <body>
       <div id="root">
-        <div id="AppContainer">
-          {children}
-        </div>
+        {children}
       </div>
       <script src="./bundle.js" />
     </body>

@@ -10,6 +10,7 @@ module.exports = {
     "quotes": ["warn", "single"],
     "semi": ["error", "never"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "import/no-extraneous-dependencies": [ "error", {"devDependencies": true}]
+    "import/no-extraneous-dependencies": [ "error", {"devDependencies": true}],
+    "react/forbid-prop-types": 0
   }
 };
