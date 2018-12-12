@@ -1,10 +1,32 @@
-import React from 'react'
-import { hot } from 'react-hot-loader'
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
+import Header from '../../containers/Header/Header'
 // import './App.scss'
 
-const App = () => (
-  <div className="title">Herrrlo</div>
-)
+class App extends Component {
+  componentDidMount() {
+    console.log('hi')
+  }
 
-export default hot(module)(App)
+  render() {
+    return (
+      <div className="app-wrap">
+        <Header />
+        <Switch>
+          <Route exact path="/" component={() => <div>home</div>} />
+          <Route exact path="/catogory" component={() => <div>catogroy</div>} />
+          <Route exact path="/live" component={() => <div>live</div>} />
+        </Switch>
+      </div>
+    )
+  }
+}
+App.defaultProps = {
+}
+
+App.propTypes = {
+}
+
+export default App

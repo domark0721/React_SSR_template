@@ -10,12 +10,14 @@ if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
 } else {
   composeEnhancers = compose
 }
-
-const store = createStore(
-  rootReducer,
-  composeEnhancers
-    ? composeEnhancers(applyMiddleware(...middlewares))
-    : applyMiddleware(...middlewares),
+const configureStore = preloadedState => (
+  createStore(
+    rootReducer,
+    preloadedState,
+    composeEnhancers
+      ? composeEnhancers(applyMiddleware(...middlewares))
+      : applyMiddleware(...middlewares),
+  )
 )
 
-export default store
+export default configureStore

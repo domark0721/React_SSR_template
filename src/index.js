@@ -1,39 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 // import { AppContainer } from 'react-hot-loader'
 
-import store from './store'
+import configureStore from './store'
 
 import App from './components/App/App'
 
+const preloadedState = window.__PRELOADED_STATE__
+delete window.__PRELOADED_STATE__
+const store = configureStore(preloadedState)
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById('root'),
 )
-
-// const render = (Component) => {
-//   ReactDOM.render(
-//     <AppContainer>
-//       <Provider store={store}>
-//         <Component />
-//       </Provider>
-//     </AppContainer>,
-//     document.getElementById('root'),
-//   )
-// }
-
-// render(App)
-// const root = require('./components/App/App').default
-
-// if (module.hot) {
-//   module.hot.accept(
-//     './components/App/App',
-//     () => {
-//       const NextRootContainer = root
-//       render(NextRootContainer)
-//     }, // if you are using harmony module ({ modules: false })
-//   )
-// }
