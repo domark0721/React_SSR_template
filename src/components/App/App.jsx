@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import Header from '../../containers/Header/Header'
 // import './App.scss'
 
+
 class App extends Component {
   componentDidMount() {
     console.log('hi')

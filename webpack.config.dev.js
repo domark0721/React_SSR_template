@@ -33,6 +33,15 @@ module.exports = {
           localIdentName: '[local]_[hash:base64:5]',
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
+      },
     ],
   },
   resolve: {
