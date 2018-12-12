@@ -14,9 +14,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-        ],
+        use: ['babel-loader'],
       },
       {
         test: /\.(scss|sass)$/,
@@ -24,7 +22,16 @@ module.exports = {
           'style-loader', // creates style nodes from JS strings
           'css-loader', // translates CSS into CommonJS
           'sass-loader', // compiles Sass to CSS, using Node Sass by default
+          'postcss-loader',
         ],
+      },
+      {
+        test: /\.css$/,
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          localIdentName: '[local]_[hash:base64:5]',
+        },
       },
     ],
   },
