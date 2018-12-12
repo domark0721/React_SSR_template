@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
+import { Provider } from 'react-redux'
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -7,10 +8,12 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 
+
 import webpackConfig from '../../webpack.config.dev'
 
 import Html from '../Html'
 import App from '../components/App/App'
+import configureStore from '../store/index'
 
 const compiler = webpack(webpackConfig)
 const PORT = process.env.PORT || 3000
@@ -27,14 +30,24 @@ app.use(webpackDevMiddleware(compiler, {
 // Add hot middleware support
 app.use(webpackHotMiddleware(compiler))
 
+const initialState = {
+  commonReducer: {
+    count: 1000,
+  },
+}
+
 app.get('*', (req, res) => {
   const context = {}
+  const store = configureStore(initialState)
+  const preloadedState = store.getState()
   const appRendered = renderToStaticMarkup(
-    <StaticRouter location={req.url} context={context}>
-      <Html>
-        <App />
-      </Html>
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <Html preloadedState={preloadedState}>
+          <App />
+        </Html>
+      </StaticRouter>
+    </Provider>,
   )
   res.send(`<!DOCTYPE html> ${appRendered}`)
 })
