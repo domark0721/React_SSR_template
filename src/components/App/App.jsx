@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
 import Header from '../../containers/Header/Header'
-// import './App.scss'
+import style from './App.scss'
 
 
 class App extends Component {
@@ -24,10 +24,9 @@ class App extends Component {
     )
   }
 }
-App.defaultProps = {
-}
 
-App.propTypes = {
-}
+App.defaultProps = {}
+
+App.propTypes = {}
 
 export default App
