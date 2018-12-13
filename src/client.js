@@ -13,18 +13,21 @@ const preloadedState = window.__PRELOADED_STATE__
 delete window.__PRELOADED_STATE__
 const store = configureStore(preloadedState)
 
-const jsx = (
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>
-)
+const render = () => {
+  ReactDOM.hydrate(
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>,
+    document.getElementById('root'),
+  )
+}
 
-ReactDOM.hydrate(jsx, document.getElementById('root'))
+render()
 
 if (module.hot) {
   module.hot.accept('./components/App/App.jsx', () => {
-    ReactDOM.hydrate(jsx, document.getElementById('root'))
+    render()
   })
 }
