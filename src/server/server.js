@@ -8,8 +8,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 
-
-import webpackConfig from '../../webpack.config.dev'
+import webpackConfig from '../../webpack'
 
 import Html from '../Html'
 import App from '../components/App/App'
@@ -20,12 +19,16 @@ const PORT = process.env.PORT || 3000
 
 const app = express()
 
+app.use(express.static(webpackConfig.output.publicPath))
+
 // Add middleware for connecting webpack bundle.js
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  hot: true,
-  publickPath: webpackConfig.output.publicPath,
-}))
+app.use(
+  webpackDevMiddleware(compiler, {
+    noInfo: true,
+    hot: true,
+    publickPath: webpackConfig.output.publicPath,
+  }),
+)
 
 // Add hot middleware support
 app.use(webpackHotMiddleware(compiler))
@@ -56,7 +59,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Open Url http://localhost:${PORT} to get started`)
 })
-
 
 // app.use(async (ctx, next) => {
 //   try {
