@@ -1,1 +1,1 @@
-export { default } from './configureStore'
+export { default, runSaga } from './configureStore'

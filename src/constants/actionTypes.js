@@ -1,0 +1,3 @@
+// Example
+export const FETCH_MUSIC_INFO = 'FETCH_MUSIC_INFO'
+export const RECEIVE_MUSIC_INFO = 'RECEIVE_MUSIC_INFO'

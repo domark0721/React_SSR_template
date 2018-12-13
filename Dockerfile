@@ -18,8 +18,10 @@ RUN npm cache clear --force \
 COPY ./ ./
 RUN npm run build --verbose
 
-FROM nginx:1.13.9-alpine
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+
+# We have express, so nginx is deprecated
+# FROM nginx:1.13.9-alpine
+# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
 # start command for devops
 # docker run -p 5001:80 -d {image}

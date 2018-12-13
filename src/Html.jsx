@@ -6,7 +6,7 @@ const Html = ({ children, preloadedState }) => {
   const preloadedHtml = (
     <script
       dangerouslySetInnerHTML={{
-        __html: `window.__PRELOADED_STATE__ =  ${JSON.stringify(preloadedState)}`,
+        __html: `window.__PRELOADED_STATE__ =  ${serialize(preloadedState)}`,
       }}
     />
   )
