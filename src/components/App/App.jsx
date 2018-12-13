@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
@@ -13,14 +13,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app-wrap">
+      <Fragment>
         <Header />
         <Switch>
           <Route exact path="/" component={() => <div>home</div>} />
           <Route exact path="/catogory" component={() => <div>catogroy</div>} />
           <Route exact path="/live" component={() => <div>live</div>} />
         </Switch>
-      </div>
+      </Fragment>
     )
   }
 }
