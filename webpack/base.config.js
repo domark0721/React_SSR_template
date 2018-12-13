@@ -2,14 +2,12 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const outputDir = 'dist'
 
 module.exports = {
   context: path.join(__dirname, '../', 'src'),
-  // babel-polyfill is for IE
-  entry: ['@babel/polyfill', './client.js'],
+  entry: ['./client.js'],
   module: {
     rules: [
       {
@@ -46,6 +44,5 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDir]),
     new webpack.NoEmitOnErrorsPlugin(),
-    // new HtmlWebpackPlugin(),
   ],
 }
