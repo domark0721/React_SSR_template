@@ -18,6 +18,7 @@ RUN npm cache clear --force \
 COPY ./ ./
 RUN npm run build --verbose
 
+ENTRYPOINT ["npm start"]
 
 # We have express, so nginx is deprecated
 # FROM nginx:1.13.9-alpine
