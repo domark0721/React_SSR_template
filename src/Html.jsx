@@ -19,7 +19,7 @@ const Html = ({ children, preloadedState }) => {
       <body>
         <div id="root">{children}</div>
         {preloadedHtml}
-        <script src="./bundle.js" />
+        <script src="./assets/bundle.js" />
       </body>
     </html>
   )

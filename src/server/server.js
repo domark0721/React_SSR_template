@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import path from 'path'
 import React from 'react'
 import { Provider } from 'react-redux'
 import express from 'express'
@@ -14,24 +15,25 @@ import Html from '../Html'
 import App from '../components/App/App'
 import configureStore from '../store/index'
 
-const compiler = webpack(webpackConfig)
 const PORT = process.env.PORT || 3000
 
 const app = express()
 
-app.use(express.static(webpackConfig.output.publicPath))
+app.use('/assets', express.static(path.resolve(__dirname, '..', '..', 'dist')))
 
-// Add middleware for connecting webpack bundle.js
-app.use(
-  webpackDevMiddleware(compiler, {
-    noInfo: true,
-    hot: true,
-    publickPath: webpackConfig.output.publicPath,
-  }),
-)
-
-// Add hot middleware support
-app.use(webpackHotMiddleware(compiler))
+if (process.env.NODE_ENV !== 'production') {
+  const compiler = webpack(webpackConfig)
+  // Add middleware for connecting webpack bundle.js
+  app.use(
+    webpackDevMiddleware(compiler, {
+      noInfo: true,
+      hot: true,
+      publickPath: webpackConfig.output.publicPath,
+    }),
+  )
+  // Add hot middleware support
+  app.use(webpackHotMiddleware(compiler))
+}
 
 const initialState = {
   commonReducer: {
