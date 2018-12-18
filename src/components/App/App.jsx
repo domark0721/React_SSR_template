@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import Header from '../../containers/Header/Header'
 import Example from '../../containers/Example/Example'
-// import style from './App.scss'
+import style from './App.scss'
 
 class App extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class App extends Component {
       <Fragment>
         <Header />
         <Switch>
-          <Route exact path="/" component={() => <div>首頁</div>} />
+          <Route exact path="/" component={() => <div className={style.title}>首頁</div>} />
           <Route exact path="/catogory" component={() => <div>分類頁</div>} />
           <Route exact path="/live" component={Example} />
         </Switch>

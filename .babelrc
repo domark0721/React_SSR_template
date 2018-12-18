@@ -11,7 +11,7 @@
   "plugins": [
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-object-rest-spread",
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
   ],
   "env": {
     "server": {
@@ -32,7 +32,7 @@
           "css-modules-transform",
           {
             "preprocessCss": "./webpack/serverSassLoader.js",
-            "generateScopedName": "[hash:8]",
+            "generateScopedName": "[local]_[hash:base64:5]",
             "extensions": [".scss", ".css", ".sass"]
           }
         ]
