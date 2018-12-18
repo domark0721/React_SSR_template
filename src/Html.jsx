@@ -16,7 +16,7 @@ const Html = ({
   const jsAssetsHtml = jsAssets.length ? (
     jsAssets.map(jsPath => <script key={jsPath} src={jsPath} />)
   ) : (
-    <script src="./assets/bundle.js" />
+    <script src="/dist/bundle.js" />
   )
   return (
     <html lang="zh">

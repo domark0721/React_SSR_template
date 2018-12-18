@@ -20,8 +20,6 @@ const PORT = process.env.PORT || 3000
 
 const app = express()
 
-app.use('/assets', express.static(path.resolve(__dirname, '..', '..', 'dist')))
-
 if (isDev) {
   const compiler = webpack(webpackConfig)
   // Add middleware for connecting webpack bundle.js
@@ -29,12 +27,14 @@ if (isDev) {
     webpackDevMiddleware(compiler, {
       noInfo: true,
       hot: true,
-      publickPath: webpackConfig.output.publicPath,
+      publicPath: webpackConfig.output.publicPath,
       serverSideRender: true,
     }),
   )
   // Add hot middleware support
   app.use(webpackHotMiddleware(compiler))
+} else {
+  app.use('/dist', express.static(path.resolve(__dirname, '..', '..', 'dist')))
 }
 
 const initialState = {
@@ -59,23 +59,23 @@ app.get('*', (req, res) => {
   const jsAssets = []
   const cssAssets = []
 
-  if (isDev) {
-    const {
-      assetsByChunkName: { main },
-      outputPath,
-    } = res.locals.webpackStats.toJson()
-    const { fs } = res.locals
+  // if (isDev) {
+  //   const {
+  //     assetsByChunkName: { main },
+  //     outputPath,
+  //   } = res.locals.webpackStats.toJson()
+  //   const { fs } = res.locals
 
-    normalizeAssets(main).forEach((sourcePath) => {
-      if (sourcePath.endsWith('.js')) {
-        jsAssets.push(sourcePath)
-      }
+    // normalizeAssets(main).forEach((sourcePath) => {
+    //   if (sourcePath.endsWith('.js')) {
+    //     jsAssets.push(sourcePath)
+    //   }
 
-      if (sourcePath.endsWith('.css')) {
-        cssAssets.push(fs.readFileSync(`${outputPath}/${sourcePath}`))
-      }
-    })
-  }
+  //     if (sourcePath.endsWith('.css')) {
+  //       cssAssets.push(fs.readFileSync(`${outputPath}/${sourcePath}`))
+  //     }
+  //   })
+  // }
 
   const appRendered = renderToStaticMarkup(
     <Provider store={store}>

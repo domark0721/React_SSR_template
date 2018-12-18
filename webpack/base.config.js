@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const AssetsPlugin = require('assets-webpack-plugin')
 
 const outputDir = 'dist'
 
@@ -38,10 +39,13 @@ module.exports = {
   // bundle
   output: {
     path: path.resolve(__dirname, '..', outputDir),
-    publicPath: '/assets',
+    publicPath: '/dist',
     filename: 'bundle.js',
   },
   plugins: [
+    new AssetsPlugin({
+      keepInMemory: true,
+    }),
     new CleanWebpackPlugin([outputDir], {
       root: path.resolve(__dirname, '..'),
     }),
