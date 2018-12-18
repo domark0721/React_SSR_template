@@ -43,12 +43,19 @@ const initialState = {
   },
 }
 
+function normalizeAssets(assets) {
+  // is Object
+  if (assets != null && typeof assets === 'object' && Array.isArray(assets) === false) {
+    return Object.values(assets)
+  }
+  return Array.isArray(assets) ? assets : [assets]
+}
+
 app.get('*', (req, res) => {
   const context = {}
   const store = configureStore(initialState)
   const preloadedState = store.getState()
 
-  // console.log(res.locals)
   const jsAssets = []
   const cssAssets = []
 
@@ -59,7 +66,7 @@ app.get('*', (req, res) => {
     } = res.locals.webpackStats.toJson()
     const { fs } = res.locals
 
-    main.forEach((sourcePath) => {
+    normalizeAssets(main).forEach((sourcePath) => {
       if (sourcePath.endsWith('.js')) {
         jsAssets.push(sourcePath)
       }
