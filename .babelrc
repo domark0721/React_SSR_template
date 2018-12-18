@@ -12,5 +12,31 @@
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-object-rest-spread",
     "react-hot-loader/babel"
-  ]
+  ],
+  "env": {
+    "server": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "useBuiltIns": "entry",
+            "targets": {
+              "node": true
+            },
+            "ignoreBrowserslistConfig": true
+          }
+        ]
+      ],
+      "plugins": [
+        [
+          "css-modules-transform",
+          {
+            "preprocessCss": "./webpack/serverSassLoader.js",
+            "generateScopedName": "[hash:8]",
+            "extensions": [".scss", ".css", ".sass"]
+          }
+        ]
+      ]
+    }
+  }
 }

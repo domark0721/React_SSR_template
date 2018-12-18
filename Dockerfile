@@ -1,8 +1,5 @@
 FROM node:10.12.0-alpine as builder
 
-# set Node environment variable to production
-ENV NODE_ENV production
-
 # Node directory in container
 WORKDIR /usr/src/app
 
@@ -12,12 +9,17 @@ RUN npm cache clear --force \
   && npm install \
   && npm cache clear --force
 
-#RUN ls -la /usr/src/app/
+# set Node environment variable to production
+ENV NODE_ENV production
+ENV PORT 80
+
+EXPOSE 80
 
 # copy all source files to docker and build 
-COPY ./ ./
+COPY . ./
 RUN npm run build --verbose
 
+CMD ["npm", "start"]
 
 # We have express, so nginx is deprecated
 # FROM nginx:1.13.9-alpine

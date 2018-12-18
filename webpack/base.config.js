@@ -38,11 +38,13 @@ module.exports = {
   // bundle
   output: {
     path: path.resolve(__dirname, '..', outputDir),
-    publicPath: '/',
+    publicPath: '/assets',
     filename: 'bundle.js',
   },
   plugins: [
-    new CleanWebpackPlugin([outputDir]),
+    new CleanWebpackPlugin([outputDir], {
+      root: path.resolve(__dirname, '..'),
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 }

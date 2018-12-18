@@ -7,7 +7,6 @@ const base = require('./base.config')
 
 module.exports = webpackMerge(base, {
   mode: 'production',
-  watch: true,
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
@@ -23,5 +22,8 @@ module.exports = webpackMerge(base, {
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
+    // splitChunks: {
+    //   chunks: 'all',
+    // },
   },
 })
