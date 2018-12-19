@@ -18,7 +18,7 @@ export function* requestMusicInfo() {
 }
 
 export function* watchFetchMusicInfo() {
-  console.log('watchFetchMusicInfo')
+  // console.log('watchFetchMusicInfo')
   yield takeEvery(FETCH_MUSIC_INFO, requestMusicInfo)
 }
 

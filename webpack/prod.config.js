@@ -10,7 +10,7 @@ module.exports = webpackMerge(base, {
   mode: 'production',
   plugins: [
     new ManifestPlugin({
-      publicPath: '/build',
+      // publicPath: '/build',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',

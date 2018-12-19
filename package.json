@@ -16,7 +16,6 @@
     "dev": {
       "command": "nodemon --exec babel-node ./src/index.js",
       "env": {
-        "BABEL_ENV": "server",
         "NODE_ENV": "development"
       }
     },
@@ -27,12 +26,7 @@
       }
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/domark0721/reactapp.git"
-  },
-  "author": "",
-  "license": "ISC",
+  "license": "KingKong",
   "pre-commit": [
     "lint"
   ],

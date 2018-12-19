@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpackBabelOptions = require('../.babelrc.webpack.js')
 
 const outputDir = 'dist'
 
@@ -13,7 +14,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              ...webpackBabelOptions,
+              babelrc: false,
+            },
+          },
+        ],
       },
       {
         test: /\.(sa|sc|c)ss$/,
