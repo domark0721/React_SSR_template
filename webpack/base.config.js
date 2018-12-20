@@ -5,6 +5,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpackBabelOptions = require('../.babelrc.webpack.js')
 
 const outputDir = 'dist'
+const isProd = process.env.NODE_ENV === 'production'
+const cssLoadersForDev = isProd ? [] : [{ loader: 'css-hot-loader' }]
 
 module.exports = {
   context: path.join(__dirname, '../', 'src'),
@@ -27,6 +29,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
+          ...cssLoadersForDev,
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
