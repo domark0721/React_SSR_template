@@ -26,8 +26,8 @@ module.exports = webpackMerge(base, {
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
-    // splitChunks: {
-    //   chunks: 'all',
-    // },
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 })
