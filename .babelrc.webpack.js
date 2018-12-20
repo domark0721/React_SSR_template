@@ -1,16 +1,16 @@
 module.exports = {
-  "presets": [
+  presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        "useBuiltIns": "entry"
-      }
+        useBuiltIns: 'entry',
+      },
     ],
-    "@babel/preset-react"
+    '@babel/preset-react',
   ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-object-rest-spread",
-    "react-hot-loader/babel",
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-object-rest-spread',
+    'react-hot-loader/babel',
   ],
 }
