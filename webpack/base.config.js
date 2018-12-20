@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const AssetsPlugin = require('assets-webpack-plugin')
+const webpackBabelOptions = require('../.babelrc.webpack.js')
 
 const outputDir = 'dist'
 
@@ -14,7 +14,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              ...webpackBabelOptions,
+              babelrc: false,
+            },
+          },
+        ],
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -24,7 +32,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]_[local]___[hash:base64:5]',
+              localIdentName: '[local]_[hash:base64:5]',
             },
           },
           { loader: 'postcss-loader' },
@@ -39,13 +47,10 @@ module.exports = {
   // bundle
   output: {
     path: path.resolve(__dirname, '..', outputDir),
-    publicPath: '/dist',
+    publicPath: '/dist/',
     filename: 'bundle.js',
   },
   plugins: [
-    new AssetsPlugin({
-      keepInMemory: true,
-    }),
     new CleanWebpackPlugin([outputDir], {
       root: path.resolve(__dirname, '..'),
     }),
