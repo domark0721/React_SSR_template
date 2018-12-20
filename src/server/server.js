@@ -43,44 +43,15 @@ const initialState = {
   },
 }
 
-function normalizeAssets(assets) {
-  // is Object
-  if (assets != null && typeof assets === 'object' && Array.isArray(assets) === false) {
-    return Object.values(assets)
-  }
-  return Array.isArray(assets) ? assets : [assets]
-}
-
 app.get('*', (req, res) => {
   const context = {}
   const store = configureStore(initialState)
   const preloadedState = store.getState()
 
-  const jsAssets = []
-  const cssAssets = []
-
-  // if (isDev) {
-  //   const {
-  //     assetsByChunkName: { main },
-  //     outputPath,
-  //   } = res.locals.webpackStats.toJson()
-  //   const { fs } = res.locals
-
-    // normalizeAssets(main).forEach((sourcePath) => {
-    //   if (sourcePath.endsWith('.js')) {
-    //     jsAssets.push(sourcePath)
-    //   }
-
-  //     if (sourcePath.endsWith('.css')) {
-  //       cssAssets.push(fs.readFileSync(`${outputPath}/${sourcePath}`))
-  //     }
-  //   })
-  // }
-
   const appRendered = renderToStaticMarkup(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
-        <Html preloadedState={preloadedState} jsAssets={jsAssets} cssAssets={cssAssets}>
+        <Html preloadedState={preloadedState}>
           <App />
         </Html>
       </StaticRouter>
