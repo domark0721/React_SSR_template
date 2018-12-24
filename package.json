@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "better-npm-run dev",
+    "start": "better-npm-run dev",
     "build": "npm-run-all --parallel build:**",
     "build:client": "NODE_ENV=production webpack --config ./webpack",
     "build:server": "BABEL_ENV=server babel src --out-dir build",
-    "start": "better-npm-run start",
+    "prod": "better-npm-run prod",
+    "startProd": "npm-run-all build startProd",
+    "startProdDocker": "node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "git diff-index --diff-filter=ACM --name-only HEAD | grep -E '(.*).(jsx|js)$' | xargs node_modules/eslint/bin/eslint.js -c .eslintrc.js"
   },
@@ -19,7 +21,7 @@
         "NODE_ENV": "development"
       }
     },
-    "start": {
+    "prod": {
       "command": "node ./build/index.js",
       "env": {
         "NODE_ENV": "production"
@@ -34,6 +36,7 @@
     "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
     "express": "^4.16.4",
+    "jsonfile": "^5.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
