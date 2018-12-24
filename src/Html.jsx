@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import serialize from 'serialize-javascript'
 
-const Html = ({ children, preloadedState }) => {
+const Html = ({
+  children, preloadedState, jsAssets, cssAssets,
+}) => {
   const preloadedHtml = (
     <script
       dangerouslySetInnerHTML={{
@@ -15,13 +17,19 @@ const Html = ({ children, preloadedState }) => {
     <html lang="zh">
       <head>
         <title>金剛</title>
-        <link rel="stylesheet" type="text/css" href="/dist/main.css" />
+        {
+          cssAssets.map(cssFile => (
+            <link rel="stylesheet" type="text/css" href={cssFile} />
+          ))
+        }
       </head>
 
       <body>
         <div id="root">{children}</div>
         {preloadedHtml}
-        <script src="/dist/bundle.js" />
+        {jsAssets.map(jsFile => (
+          <script src={jsFile} />
+        ))}
       </body>
     </html>
   )
@@ -34,6 +42,8 @@ Html.defaultProps = {
 Html.propTypes = {
   children: PropTypes.node.isRequired,
   preloadedState: PropTypes.object,
+  jsAssets: PropTypes.array.isRequired,
+  cssAssets: PropTypes.array.isRequired,
 }
 
 export default Html

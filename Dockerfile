@@ -17,9 +17,12 @@ EXPOSE 80
 
 # copy all source files to docker and build 
 COPY . ./
+
+# prod will build and start
 RUN npm run build --verbose
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "startProdDocker"]
+
 
 # We have express, so nginx is deprecated
 # FROM nginx:1.13.9-alpine
